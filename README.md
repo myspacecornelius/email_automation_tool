@@ -18,7 +18,7 @@ Use **Anaconda** or **Miniconda** to manage your Python environment.
 ```bash
 conda create -n email_scraper_env python=3.8
 conda activate email_scraper_env
-bash
+```bash
 
 2. Install Dependencies
 With the environment activated, install Scrapy:
