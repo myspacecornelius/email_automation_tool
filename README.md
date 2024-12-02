@@ -1,5 +1,3 @@
-# email_tool
-Python code using Scrapy to extract emails from a URL and send them automatically
 # Email Scraper with Scrapy
 
 A Python-based web scraping project that extracts email addresses from web pages using the Scrapy framework and saves them into a CSV file.
