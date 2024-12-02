@@ -15,14 +15,11 @@ A Python-based web scraping tool using Scrapy to extract email addresses from we
 Use **Anaconda** or **Miniconda** to manage your Python environment.
 
 #### With Miniconda/Anaconda:
+1. Create and Activate the Conda Environment
+
+Run the following commands:
+
 ```bash
 conda create -n email_scraper_env python=3.8
 conda activate email_scraper_env
-```bash
 
-2. Install Dependencies
-With the environment activated, install Scrapy:
-
-```bash
-pip install scrapy
-bash
