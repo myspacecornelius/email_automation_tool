@@ -22,6 +22,6 @@ Run the following commands:
 ```bash
 conda create -n email_scraper_env python=3.8
 conda activate email_scraper_env
-
+```
 
 2. 
