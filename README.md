@@ -1,6 +1,6 @@
-# Email Scraper with Scrapy
+# Email Automation tool with Scrapy
 
-A Python-based web scraping tool using Scrapy to extract email addresses from websites and save them in a CSV file.
+A Python-based web email automation tool using Scrapy to extract email addresses from websites and send email via a CSV file.
 
 ## Installation
 
@@ -65,6 +65,61 @@ contact@example.com
 info@website.org
 admin@sampledomain.com
 ```
+Automation of Email Campaign
+Email Tool
+The email automation process includes two key components:
+
+Scraping Email Addresses: Scrapy will crawl the specified website(s), extract email addresses, and save them in a CSV file (emails.csv). This file will be used in the next step for sending emails.
+
+Running Email Campaign: Once email addresses are scraped and saved in the CSV file, an email campaign is triggered automatically using the collected email data. The campaign is managed using the send_email.py script.
+
+Workflow Overview
+The email automation workflow follows these steps:
+
+Run the Scraper: The scraper is executed by calling the scrapy crawl email_spider command. It extracts emails from the provided website URL and stores them in a CSV file.
+
+Validate and Proceed with Campaign: The tool checks if the emails.csv file exists and contains valid email addresses. If the file is non-empty, the email campaign proceeds. If not, the process is halted, and no emails are sent.
+
+Send Emails: If valid emails are found, the send_email.py script is triggered to send an email to each address in the CSV file.
+
+Email Tool Script Overview
+The main script (email_tool.py) automates the entire process by executing the following functions:
+
+run_scraper: Executes the Scrapy spider to scrape emails from a given website.
+run_email_campaign: Executes the email campaign using the send_email.py script.
+main: Orchestrates the entire process by first running the scraper, then checking for the existence of the CSV file, and finally triggering the email campaign if valid email addresses are found.
+Here is a simplified version of the email_tool.py:
+
+```bash
+import os
+import subprocess
+
+def run_scraper():
+    print("Running email scraper...")
+    subprocess.run(['scrapy', 'crawl', 'email_spider'], cwd=os.path.join('email_scraper'))
+    print("Email scraper finished.")
+
+def run_email_campaign():
+    print("Running email campaign...")
+    subprocess.run(['python', 'send_email.py'], cwd=os.path.join('email_campaign'))
+
+def main():
+    # Path to the shared emails.csv file
+    data_file = os.path.join('common_data', 'emails.csv')
+    
+    # Step 1: Run the scraper
+    run_scraper()
+    
+    # Step 2: Check if emails.csv is non-empty
+    if os.path.exists(data_file) and os.stat(data_file).st_size > 0:
+        print("Emails found. Proceeding with email campaign...")
+        run_email_campaign()
+    else:
+        print("No emails found. Skipping email campaign.")
+
+if __name__ == '__main__':
+    main()
+```
 
 Notes
 The project respects robots.txt rules by default (ROBOTSTXT_OBEY=True).
@@ -84,19 +139,4 @@ Ensure all required dependencies are installed in the Conda environment. Check t
 ```bash
 python --version
 ```
-License
-This project is licensed under the MIT License.
-
-### How to Add to GitHub
-```bash
-1. Open your project folder.
-2. Create a new file named `README.md`.
-3. Copy and paste the above content into the `README.md` file.
-4. Save the file and commit it to your GitHub repository:
-   ```bash
-   git add README.md
-   git commit -m "Added README.md"
-   git push
-```
-
 This will make it easy for anyone to use and understand your project directly from GitHub.
