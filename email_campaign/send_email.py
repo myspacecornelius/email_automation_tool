@@ -5,10 +5,10 @@ import pandas as pd
 import os
 
 # SMTP Configuration
-SMTP_SERVER = 'smtpout.secureserver.net'
+SMTP_SERVER = 'Add outgoing server'
 SMTP_PORT = 587
-EMAIL_ADDRESS = 'ansif@sevendyne.com'
-EMAIL_PASSWORD = 'ansif@s7dyne2016$'
+EMAIL_ADDRESS = 'Add your email'
+EMAIL_PASSWORD = 'add your password here'
 SENDER_NAME = 'Test Email programs'
 
 # Email sending function
