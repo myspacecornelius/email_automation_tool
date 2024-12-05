@@ -2,6 +2,10 @@
 
 A Python-based web email automation tool using Scrapy to extract email addresses from websites and send email via a CSV file.
 
+### Demo Video  
+[![Watch the demo](https://img.youtube.com/vi/h1d7UtJY58U/0.jpg)](https://youtu.be/h1d7UtJY58U)
+
+
 ## Installation
 
 ### 1. Set Up Python Environment
