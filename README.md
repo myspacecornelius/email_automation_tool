@@ -1,146 +1,159 @@
-# Email Automation tool with Scrapy
+# Enhanced VC Email Automation Tool
 
-A Python-based web email automation tool using Scrapy to extract email addresses from websites and send email via a CSV file.
+A Python-based automation tool specialized in gathering VC investor contact information, with support for both simple email scraping and advanced VC-specific data collection.
 
-### Demo Video  
-[![Watch the demo](https://img.youtube.com/vi/h1d7UtJY58U/0.jpg)](https://youtu.be/h1d7UtJY58U)
+## Directory Structure
 
+```
+email_automation_tool/
+├── common_data/              # Shared data directory
+│   ├── emails.csv           # General email scraping results
+│   └── vc_investors_emails.csv  # VC-specific results with additional info
+│
+├── email_campaign/          # Email campaign functionality
+│   ├── send_email.py       # Email sending logic
+│   └── templates/          # Email templates
+│       └── email_form.html
+│
+├── email_scraper/          # Core scraping functionality
+│   ├── spiders/           # Scrapy spiders
+│   │   └── email_spider.py  # Basic email spider
+│   ├── vc_investor_scraper.py  # Advanced VC-specific scraper
+│   ├── vc_url_gatherer.py  # VC firm URL discovery
+│   └── settings.py        # Scrapy settings
+│
+├── email_tool.py          # Main CLI tool
+├── requirements.txt       # Project dependencies
+└── scrapy.cfg            # Scrapy configuration
+```
 
 ## Installation
 
-### 1. Set Up Python Environment
-Use **Anaconda** or **Miniconda** to manage your Python environment.
-
-#### With Miniconda/Anaconda:
-1. Create and Activate the Conda Environment
-
-Run the following commands:
-
+1. Set up Python environment:
 ```bash
-conda create -n email_scraper_env python=3.8
-conda activate email_scraper_env
+conda create -n vc_scraper_env python=3.8
+conda activate vc_scraper_env
 ```
 
-2. Install Dependencies
-With the environment activated, install Scrapy:
-
+2. Install dependencies:
 ```bash
-pip install scrapy
+pip install -r requirements.txt
 ```
 
-How to Run the Spider
-1. Navigate to the Project Folder:
+## Usage
+
+### Basic Email Scraping
+For simple email collection from a website:
 ```bash
-cd email_scraper
+python email_tool.py --url "https://example.com"
 ```
 
-2. Start the Spider with the Target URL:
+### VC-Specific Scraping
+For comprehensive VC investor data collection:
+
 ```bash
-scrapy crawl email_spider -a url="https://example.com"
+# Scrape a specific VC firm website
+python email_tool.py --vc --url "https://vc-firm-website.com"
+
+# Auto-discover and scrape multiple VC firms
+python email_tool.py --vc
+
+# Scrape without running email campaign
+python email_tool.py --vc --url "https://vc-firm-website.com" --no-campaign
 ```
 
-Output
-Extracted emails will be saved to a CSV file in the project directory.
+## Features
 
-For example, if the URL is https://example.com, the output file will be named: example_com_emails.csv
+### URL Discovery (New!)
+- Extensive VC directory coverage
+- Global and regional VC associations
+- Industry-specific directories
+- Angel/seed networks
+- Accelerator networks
+- Checkpoint system for reliable gathering
+- Rate limiting and retry logic
+- Progress tracking and logging
 
-How It Works
+### Email Scraping
+- Basic email pattern matching
+- JavaScript-rendered content support
+- Cookie consent handling
+- Rate limiting and retry logic
+- Respects robots.txt
 
-Code Overview
-The main spider code (email_spider.py) performs the following steps:
+### VC-Specific Features
+- Automatic VC firm discovery
+- Team/contact page detection
+- Advanced email extraction methods
+- Additional data collection (firm name, focus areas)
+- Contact form detection
 
-Crawls a website: Starting from the given URL, it extracts and follows internal links.
-Extracts email addresses: Uses regex to identify valid email patterns.
-Filters duplicates and invalid emails: Ensures only unique, valid email addresses are stored.
-Saves results: Appends each extracted email to a CSV file.
+### Email Campaign
+- HTML email templates
+- Customizable messaging
+- Campaign tracking
 
-Dependencies
+## Output Format
 
-Python 3.8 or higher
-Scrapy framework
-Install dependencies using the instructions in the Installation section.
-
-Example Output
-A sample output in the CSV file (example_com_emails.csv):
-
-```bash
+### Basic Mode (emails.csv)
+```csv
 email_ids
-contact@example.com
-info@website.org
-admin@sampledomain.com
-```
-Automation of Email Campaign
-Email Tool
-The email automation process includes two key components:
-
-Scraping Email Addresses: Scrapy will crawl the specified website(s), extract email addresses, and save them in a CSV file (emails.csv). This file will be used in the next step for sending emails.
-
-Running Email Campaign: Once email addresses are scraped and saved in the CSV file, an email campaign is triggered automatically using the collected email data. The campaign is managed using the send_email.py script.
-
-Workflow Overview
-The email automation workflow follows these steps:
-
-Run the Scraper: The scraper is executed by calling the scrapy crawl email_spider command. It extracts emails from the provided website URL and stores them in a CSV file.
-
-Validate and Proceed with Campaign: The tool checks if the emails.csv file exists and contains valid email addresses. If the file is non-empty, the email campaign proceeds. If not, the process is halted, and no emails are sent.
-
-Send Emails: If valid emails are found, the send_email.py script is triggered to send an email to each address in the CSV file.
-
-Email Tool Script Overview
-The main script (email_tool.py) automates the entire process by executing the following functions:
-
-run_scraper: Executes the Scrapy spider to scrape emails from a given website.
-run_email_campaign: Executes the email campaign using the send_email.py script.
-main: Orchestrates the entire process by first running the scraper, then checking for the existence of the CSV file, and finally triggering the email campaign if valid email addresses are found.
-Here is a simplified version of the email_tool.py:
-
-```bash
-import os
-import subprocess
-
-def run_scraper():
-    print("Running email scraper...")
-    subprocess.run(['scrapy', 'crawl', 'email_spider'], cwd=os.path.join('email_scraper'))
-    print("Email scraper finished.")
-
-def run_email_campaign():
-    print("Running email campaign...")
-    subprocess.run(['python', 'send_email.py'], cwd=os.path.join('email_campaign'))
-
-def main():
-    # Path to the shared emails.csv file
-    data_file = os.path.join('common_data', 'emails.csv')
-    
-    # Step 1: Run the scraper
-    run_scraper()
-    
-    # Step 2: Check if emails.csv is non-empty
-    if os.path.exists(data_file) and os.stat(data_file).st_size > 0:
-        print("Emails found. Proceeding with email campaign...")
-        run_email_campaign()
-    else:
-        print("No emails found. Skipping email campaign.")
-
-if __name__ == '__main__':
-    main()
+example@domain.com
 ```
 
-Notes
-The project respects robots.txt rules by default (ROBOTSTXT_OBEY=True).
-Use this tool responsibly and avoid scraping websites without permission.
-
-Troubleshooting
-1. scrapy: command not found
-Ensure Scrapy is installed in your active environment. Use the full Python command if needed:
-
-```bash
-python -m scrapy crawl email_spider -a url="https://example.com"
+### VC Mode (vc_investors_emails.csv)
+```csv
+email,firm_name,url,additional_info
+investor@vc.com,Acme VC,https://acmevc.com,Focuses on Series A
 ```
 
-2. Missing Dependencies
-Ensure all required dependencies are installed in the Conda environment. Check the Python version:
+## Configuration
 
-```bash
-python --version
-```
-This will make it easy for anyone to use and understand your project directly from GitHub.
+### URL Gatherer Settings
+The VC URL gatherer (`vc_url_gatherer.py`) supports:
+- Checkpoint files for resuming interrupted runs
+- Configurable rate limiting
+- Extensive logging
+- Backup creation
+- Progress tracking
+
+### Scraping Settings
+Edit `email_scraper/settings.py` to modify:
+- Crawl depth
+- Request delays
+- Concurrent requests
+- User agent
+- Cache settings
+
+### Email Settings
+Configure email campaign settings in `email_campaign/send_email.py`
+
+## Best Practices
+
+1. **Rate Limiting**: Default settings include polite delays between requests
+2. **Verification**: Always verify emails before sending campaigns
+3. **Compliance**: Respect website terms of service and robots.txt
+4. **Data Privacy**: Handle collected information responsibly
+5. **Resumable Operations**: Use checkpoint system for large scraping tasks
+
+## Troubleshooting
+
+1. **URL Gathering Issues**
+   - Check logs in vc_url_gatherer.log
+   - Verify network connectivity
+   - Check for rate limiting
+   - Use checkpoint files to resume
+
+2. **No Emails Found**
+   - Check URL accessibility
+   - Verify JavaScript rendering
+   - Check rate limiting
+
+3. **Email Campaign Issues**
+   - Verify SMTP settings
+   - Check email template formatting
+   - Ensure valid email addresses
+
+## License
+
+MIT License - Feel free to use and modify for your projects.

@@ -1,0 +1,10 @@
+email_scraper/settings.py
+email_scraper/scrapy.cfg
+items.py
+emails.csv
+pipelines.py
+middlewares.py
+__init__.py
+settings.cpython-312.pyc
+__init__.cpython-312.pyc
+email_spider.cpython-312.pyc

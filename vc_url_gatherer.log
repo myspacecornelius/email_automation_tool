@@ -1,0 +1,54 @@
+2025-05-04 03:05:51,061 - INFO - ====== WebDriver manager ======
+2025-05-04 03:05:51,817 - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-04 03:05:51,918 - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-04 03:05:51,982 - INFO - Driver [/Users/corndog/.wdm/drivers/chromedriver/mac64/130.0.6723.116/chromedriver-mac-x64/chromedriver] found in cache
+2025-05-04 03:05:54,330 - INFO - Gathering URLs from https://www.crunchbase.com/hub/venture-capital-firms
+2025-05-04 03:05:56,805 - INFO - Gathering URLs from https://www.vcaonline.com/firms/
+2025-05-04 03:06:00,036 - INFO - Found 31 new URLs from https://www.vcaonline.com/firms/
+2025-05-04 03:06:00,037 - INFO - Saved checkpoint with 31 URLs
+2025-05-04 03:06:00,038 - INFO - Searching for: top venture capital firms
+2025-05-04 03:06:03,393 - INFO - Searching for: VC firms contact
+2025-05-04 03:06:06,154 - INFO - Saved 31 URLs to email_scraper/vc_firms_urls.csv
+2025-05-04 03:06:06,610 - INFO - ====== WebDriver manager ======
+2025-05-04 03:06:06,992 - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-04 03:06:07,087 - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-04 03:06:07,171 - INFO - Driver [/Users/corndog/.wdm/drivers/chromedriver/mac64/130.0.6723.116/chromedriver-mac-x64/chromedriver] found in cache
+2025-05-04 03:06:09,881 - INFO - Scraping https://www.vcaonline.com/
+2025-05-04 03:06:13,602 - ERROR - Error processing https://www.vcaonline.com/: name 'random' is not defined
+2025-05-04 03:24:38,473 - INFO - ====== WebDriver manager ======
+2025-05-04 03:24:38,780 - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-04 03:24:38,935 - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-04 03:24:39,011 - INFO - Driver [/Users/corndog/.wdm/drivers/chromedriver/mac64/130.0.6723.116/chromedriver-mac-x64/chromedriver] found in cache
+2025-05-04 03:24:41,702 - INFO - Scraping https://vc-firm-website.com
+2025-05-04 03:24:42,479 - ERROR - Error processing https://vc-firm-website.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=130.0.6723.70)
+Stacktrace:
+0   chromedriver                        0x000000010a454b58 chromedriver + 8182616
+1   chromedriver                        0x000000010a44c08a chromedriver + 8147082
+2   chromedriver                        0x0000000109ce7fa0 chromedriver + 397216
+3   chromedriver                        0x0000000109cdff2b chromedriver + 364331
+4   chromedriver                        0x0000000109cd0748 chromedriver + 300872
+5   chromedriver                        0x0000000109cd244a chromedriver + 308298
+6   chromedriver                        0x0000000109cd09ea chromedriver + 301546
+7   chromedriver                        0x0000000109cd02f4 chromedriver + 299764
+8   chromedriver                        0x0000000109cd022e chromedriver + 299566
+9   chromedriver                        0x0000000109cce30c chromedriver + 291596
+10  chromedriver                        0x0000000109cce94a chromedriver + 293194
+11  chromedriver                        0x0000000109cea8d9 chromedriver + 407769
+12  chromedriver                        0x0000000109d77ee5 chromedriver + 986853
+13  chromedriver                        0x0000000109d58952 chromedriver + 858450
+14  chromedriver                        0x0000000109d77284 chromedriver + 983684
+15  chromedriver                        0x0000000109d586f3 chromedriver + 857843
+16  chromedriver                        0x0000000109d271c2 chromedriver + 655810
+17  chromedriver                        0x0000000109d2819e chromedriver + 659870
+18  chromedriver                        0x000000010a419da0 chromedriver + 7941536
+19  chromedriver                        0x000000010a41dcf4 chromedriver + 7957748
+20  chromedriver                        0x000000010a3fb917 chromedriver + 7817495
+21  chromedriver                        0x000000010a41e77e chromedriver + 7960446
+22  chromedriver                        0x000000010a3eabe4 chromedriver + 7748580
+23  chromedriver                        0x000000010a43a3a8 chromedriver + 8074152
+24  chromedriver                        0x000000010a43a566 chromedriver + 8074598
+25  chromedriver                        0x000000010a44bc98 chromedriver + 8146072
+26  libsystem_pthread.dylib             0x00007ff8184811d3 _pthread_start + 125
+27  libsystem_pthread.dylib             0x00007ff81847cbd3 thread_start + 15
+
